@@ -13,3 +13,4 @@ $ npm install      // kun første gang
 $ npm start
 ```
 
+# Redneck-Inc.
