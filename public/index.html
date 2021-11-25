@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <script src="scripts/d3.js"></script>
+  <link rel="stylesheet" type="text/css" href="includes/style.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="cssmap-continents/cssmap-continents.css" media="screen" />
+  <title>Redneck Inc.</title>
+  <style>
+    #heading1{
+      text-align: center;
+      text-shadow: 0 0 2px darkgrey;
+      color: silver;
+      font-family:verdana,sans-serif;
+      font-size: 350%;
+    }
+    body{
+      background-color: #000322;
+    }
+    #text{
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="heading1">Redneck Inc. </h1>
+
+  <script>
+  // Denne query kører op imod API'en som findes i 'main.js'.
+  // Denne HTML skal derfor åbnes igennem serveren for at virke.
+  d3.json("/api/RedneckInc", {
+    method: "POST", 
+  }).then(function(response) {
+    const data = response.data; // Hent data ud af response
+    console.log("data", data);
+
+    const w = 625;
+    const h = 350;
+
+    // Lav SVG element
+    const svg = d3.select("body")
+      .append("svg")
+      .attr("width", w)
+      .attr("height", h);
+
+    // Indsæt tekst fra postgres query som eksempel
+    svg.selectAll("text")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("x", 20)
+      .attr("y", 20)
+      .style('fill', 'silver')
+      .text(function (d) { return "Landenavne fra databasen: " + d.country_name; }) 
+      
+    // Lav din egen visualsering med data her!
+
+    
+
+  });
+  
+  </script>
+</body>
+</html>
