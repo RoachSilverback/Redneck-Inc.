@@ -27,7 +27,7 @@
 </head>
 
 <body>
-  <h1 id="heading1">Redneck Inc.</h1>
+  <h1 id="heading1">Redneck Inc. </h1>
 
   <script>
   // Denne query kører op imod API'en som findes i 'main.js'.
@@ -55,9 +55,11 @@
       .attr("x", 20)
       .attr("y", 20)
       .style('fill', 'silver')
-      .text(function (d) { return "Landenavne" + d.country_name;}) 
+      .text(function (d) { return "Landenavne fra databasen: " + d.country_name; }) 
       
     // Lav din egen visualsering med data her!
+
+    
 
   });
   
