@@ -66,7 +66,7 @@ app.use(morgan("combined"));
 app.post("/api/RedneckInc", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT country_name from Redneckinc`;
+    const query = `SELECT country_name,  from Redneckinc`;
     queryData = await client.query(query);
     // Giv svar tilbage til JavaScript
     res.json({
