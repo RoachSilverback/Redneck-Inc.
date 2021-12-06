@@ -37,7 +37,7 @@
     console.log("response", response);
 
     const w = 1200;
-    const h = 350;
+    const h = 620;
 
     // Lav SVG element
     const svg = d3.select("body")
@@ -52,7 +52,7 @@
       console.log(json);
 
     // Lav en mercator projection, fit ind i w og h
-    const projection = d3.geoMercator().fitSize([w, h], json);
+    const projection = d3.geoMercator().fitSize([w, h], json).scale([150]);
 
     // Lav en path ud fra projektion
     const path = d3.geoPath(projection);
@@ -70,9 +70,9 @@
         return "lightgrey";
       })
       .on("mouseover", function(d){
-        d3.select(this.features).select("text").style("fill", "blue");
+        const {continent} =d.properties;
       }).on("mouseout", function(d){
-        d3.select(this.features).select("text").style("fill", "blue");
+        d3.select().select("path").style("fill", "blue");
       })
   });
 });
