@@ -36,7 +36,7 @@
     const data = response.data; // Hent data ud af response
     console.log("response", response);
 
-    const w = 625;
+    const w = 1200;
     const h = 350;
 
     // Lav SVG element
@@ -45,16 +45,6 @@
       .attr("width", w)
       .attr("height", h);
 
-    // Indsæt tekst fra postgres query som eksempel
-    svg.selectAll("text")
-      .data(data)
-      .enter()
-      .append("text")
-      .attr("x", 20)
-      .attr("y", 20)
-      .style('fill', 'silver')
-      .text(function (d) { return "Landenavne fra databasen: " + d.country_name; }) 
-      
     // Lav din egen visualsering med data her!
     
     // Hent GeoJSON
@@ -78,6 +68,11 @@
       })
       .attr("fill", function(d){
         return "lightgrey";
+      })
+      .on("mouseover", function(d){
+        d3.select(this.features).select("text").style("fill", "blue");
+      }).on("mouseout", function(d){
+        d3.select(this.features).select("text").style("fill", "blue");
       })
   });
 });
