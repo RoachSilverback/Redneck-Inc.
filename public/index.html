@@ -57,24 +57,61 @@
     // Lav en path ud fra projektion
     const path = d3.geoPath(projection);
 
+    let mouseOver = function(d){
+      d3.selectAll("continent")
+        .transition()
+        .duration(200)
+        .style("opacity", .5)
+      d3.select("this")
+        .transition()
+        .duration(200)
+        .style("stroke", "black")
+        .style("opacity", 1)
+    }
+
+    let mouseLeave = function(d){
+      d3.selectAll("continent")
+      .transition()
+      .duration(200)
+      .style("opacity", .8)
+      d3.select("this")
+      .transition()
+      .duration(200)
+      .style("stroke", "black")
+      .style("opacity", 1)
+    }
+
     // Tegn path med SVG. Path data indsættes som 'd'-attribut
-    svg.selectAll("path")
+    // Tegner kortet
+    svg.append("g")
+      .selectAll("path")
       .data(json.features)
       .enter()
       .append("path")
       .attr("d", path)
       .attr("stroke", function(d){
-        return "#3d2706";
+        return "black";
       })
       .attr("fill", function(d){
-        return "lightgrey";
-      })
-      .on("mouseover", function(d){
-        const {continent} =d.properties;
-      }).on("mouseout", function(d){
-        d3.select().select("path").style("fill", "blue");
+        return "silver";
       })
   });
+    // Tegner kontinenter
+    svg.append("d")
+      .selectAll("path")
+      .data(json.features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("stroke", function(d){
+        return "black";
+      })
+      .attr("fill", function(d){
+        return "silver";
+      })
+      .attr("class", function(d){ return "continent"})
+      .on("mouseOver", mouseOver)
+      .on("mouseLeave", mouseLeave)
 });
 
   </script>
