@@ -52,7 +52,7 @@
       console.log(json);
 
     // Lav en mercator projection, fit ind i w og h
-    const projection = d3.geoMercator().fitSize([w, h], json).scale([150]);
+    const projection = d3.geoMercator().fitSize([w, h], json);
 
     // Lav en path ud fra projektion
     const path = d3.geoPath(projection);
