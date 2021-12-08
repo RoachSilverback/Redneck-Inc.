@@ -48,7 +48,7 @@
     // Lav din egen visualsering med data her!
     
     // Hent GeoJSON
-    d3.json("./geomap.json").then(function (json) {
+    d3.json("./continents.json").then(function (json) {
       console.log(json);
 
     // Lav en mercator projection, fit ind i w og h
@@ -57,48 +57,21 @@
     // Lav en path ud fra projektion
     const path = d3.geoPath(projection);
 
+    // Mus over effekt function
     let mouseOver = function(d){
-      d3.selectAll("continent")
-        .transition()
-        .duration(200)
-        .style("opacity", .5)
-      d3.select("this")
-        .transition()
-        .duration(200)
-        .style("stroke", "black")
-        .style("opacity", 1)
-    }
+            console.log("hej")
+    };
 
+    // Mus flyttes effekt function
     let mouseLeave = function(d){
-      d3.selectAll("continent")
-      .transition()
-      .duration(200)
-      .style("opacity", .8)
-      d3.select("this")
-      .transition()
-      .duration(200)
-      .style("stroke", "black")
-      .style("opacity", 1)
-    }
+            console.log("farvel")
+    };
 
     // Tegn path med SVG. Path data indsættes som 'd'-attribut
     // Tegner kortet
-    svg.append("g")
-      .selectAll("path")
-      .data(json.features)
-      .enter()
-      .append("path")
-      .attr("d", path)
-      .attr("stroke", function(d){
-        return "black";
-      })
-      .attr("fill", function(d){
-        return "silver";
-      })
-  });
+  
     // Tegner kontinenter
-    svg.append("d")
-      .selectAll("path")
+    svg.selectAll("path")
       .data(json.features)
       .enter()
       .append("path")
@@ -109,11 +82,11 @@
       .attr("fill", function(d){
         return "silver";
       })
-      .attr("class", function(d){ return "continent"})
-      .on("mouseOver", mouseOver)
-      .on("mouseLeave", mouseLeave)
+      .attr("class", function(g){return "continent"})
+      .on("mouseover", mouseOver )
+      .on("mouseleave", mouseLeave )
+  });
 });
-
   </script>
 </body>
 </html>
