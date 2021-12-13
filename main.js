@@ -63,10 +63,10 @@ app.use(morgan("combined"));
  * Man laver lige så mange endpoints man har lyst til. Jeg har lavet et enkelt til
  * querien `SELECT 'Hello, World' as message`.
  */
-app.post("/api/RedneckInc", async (req, res) => {
+app.post("/api/heatmap", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT country_name,  from Redneckinc`;
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature from Redneckinc`;
     queryData = await client.query(query);
     // Giv svar tilbage til JavaScript
     res.json({
