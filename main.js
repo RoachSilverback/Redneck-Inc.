@@ -63,17 +63,141 @@ app.use(morgan("combined"));
  * Man laver lige så mange endpoints man har lyst til. Jeg har lavet et enkelt til
  * querien `SELECT 'Hello, World' as message`.
  */
-app.post("/api/heatmap", async (req, res) => {
+app.post("/api/data1", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT continent_id, country_id, country_name, annual_temperature from Redneckinc`;
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature 
+    FROM Redneckinc
+    WHERE continent_id = '1'`;
     queryData = await client.query(query);
+    
     // Giv svar tilbage til JavaScript
     res.json({
       "ok": true,
       "data": queryData.rows,
     })
   } catch (error) {
+
+    // Hvis query fejler, fanges det her.
+    // Send fejlbesked tilbage til JavaScript
+    res.json({
+      "ok": false,
+      "message": error.message,
+    })
+  }
+});
+
+app.post("/api/data2", async (req, res) => {
+  try {
+    // Lav query
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature 
+    FROM Redneckinc
+    WHERE continent_id = '2'`;
+    queryData = await client.query(query);
+    
+    // Giv svar tilbage til JavaScript
+    res.json({
+      "ok": true,
+      "data": queryData.rows,
+    })
+  } catch (error) {
+
+    // Hvis query fejler, fanges det her.
+    // Send fejlbesked tilbage til JavaScript
+    res.json({
+      "ok": false,
+      "message": error.message,
+    })
+  }
+});
+
+app.post("/api/data3", async (req, res) => {
+  try {
+    // Lav query
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature 
+    FROM Redneckinc
+    WHERE continent_id = '3'`;
+    queryData = await client.query(query);
+    
+    // Giv svar tilbage til JavaScript
+    res.json({
+      "ok": true,
+      "data": queryData.rows,
+    })
+  } catch (error) {
+
+    // Hvis query fejler, fanges det her.
+    // Send fejlbesked tilbage til JavaScript
+    res.json({
+      "ok": false,
+      "message": error.message,
+    })
+  }
+});
+
+app.post("/api/data4", async (req, res) => {
+  try {
+    // Lav query
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature 
+    FROM Redneckinc
+    WHERE continent_id = '4'`;
+    queryData = await client.query(query);
+    
+    // Giv svar tilbage til JavaScript
+    res.json({
+      "ok": true,
+      "data": queryData.rows,
+    })
+  } catch (error) {
+
+    // Hvis query fejler, fanges det her.
+    // Send fejlbesked tilbage til JavaScript
+    res.json({
+      "ok": false,
+      "message": error.message,
+    })
+  }
+});
+
+app.post("/api/data5", async (req, res) => {
+  try {
+    // Lav query
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature 
+    FROM Redneckinc
+    WHERE continent_id = '5'`;
+    queryData = await client.query(query);
+    
+    // Giv svar tilbage til JavaScript
+    res.json({
+      "ok": true,
+      "data": queryData.rows,
+    })
+  } catch (error) {
+
+    // Hvis query fejler, fanges det her.
+    // Send fejlbesked tilbage til JavaScript
+    res.json({
+      "ok": false,
+      "message": error.message,
+    })
+  }
+});
+
+app.post("/api/data6", async (req, res) => {
+  try {
+    // Lav query
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature 
+    FROM Redneckinc
+    WHERE continent_id = '6'`;
+    queryData = await client.query(query);
+    
+    // Giv svar tilbage til JavaScript
+    res.json({
+      "ok": true,
+      "data": queryData.rows,
+    })
+  } catch (error) {
+
     // Hvis query fejler, fanges det her.
     // Send fejlbesked tilbage til JavaScript
     res.json({

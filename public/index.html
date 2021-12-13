@@ -85,24 +85,11 @@
       .style("stroke-width", 0.15)
       };
 
-  // Scroll page effekt kortet
-  /*
-  function scrollTween(offset) {
-    return function() {
-      const i = d3.interpolaterNumber(window.pageYoffset || document.documentElement.scrollTop, offset);
-      return function(t) { scrollTo(0, i (t)); };
-    };
+  // Mus klik vælger data
+  let mouseClick = function(d, g){
+      update (g.properties.continent)
+      console.log(d, g)
   }
-  
-  function scrollToElem(delay, duration, selector){
-    const offset = d3.select(selector).offset().top - window.scrollY;
-
-    d3.transition()
-      .delay(1000)
-      .duration(3000)
-      .tween("scroll", scrollTween(offset));
-  }
-  */
 
   // Tegn path med SVG. Path data indsættes som 'd'-attribut
   // Tegner kontinenter
@@ -121,13 +108,10 @@
       .attr("class", function(g){return "continent"})
       .on("mouseover", mouseOver1 )
       .on("mouseleave", mouseLeave1 )
-      .on("click", function(d, g){
-        console.log(d, g)
-        
-        });
+      .on("click", mouseClick )        
       });
-
-      // Heatmap afdeling
+          
+    // Heatmap afdeling
     // Array for heatmap x-akse
     let heatmapArrayX = ["Continent"];
 
@@ -147,7 +131,8 @@
 
     // Denne query kører op imod API'en som findes i 'main.js'.
     // Denne HTML skal derfor åbnes igennem serveren for at virke.
-    d3.json("/api/heatmap", {
+    function update(selectedVar) {
+    d3.json(`/api/data${selectedVar}`, {
       method: "POST", 
     }).then(function(response) {
       const datatemp = response.data; // Hent data ud af response
@@ -155,7 +140,7 @@
     
     // Definerer skalaer og akser baseret på data
     const mineGrupper = d3.map(datatemp, function(d){return d.continent_id;}).keys()
-    const mineVari = d3.map(datatemp, function(d){return d.country_id;}).keys()
+    const mineVari = d3.map(datatemp, function(d){return d.country_name;}).keys()
     
     // Byg X skalaer og akse
     const x = d3.scaleBand()
@@ -171,7 +156,7 @@
     // Byg Y skalaer og akse
     const y = d3.scaleBand()
       .range([height, 0])
-      .domain(mineVari)
+      .domain(datatemp.map(function(d) {return d.country_name}))
       .padding(0.05)
     svg2.append("g")
       .style("font-size", 15)
@@ -218,11 +203,10 @@
 
     // Tilføj firkanter
     svg2.selectAll()
-      .data(datatemp, function(d) {return d.continent_id+':'+d.country_id;})
+      .data(datatemp, function(d) {return heatmapArrayX+':'+d.country_id;})
       .enter()
       .append("rect")
-        .attr("x", function(d) {return x(d.continent_id) })
-        .attr("y", function(d) {return y(d.country_id) })
+        .attr("y", function(d) {return y(d.country_name) })
         .attr("rx", 4)  
         .attr("ry", 4)
         .attr("width", x.bandwidth() )
@@ -234,7 +218,9 @@
       .on("mouseover", mouseover)
       .on("mousemove", mousemove)
       .on("mouseleave", mouseleave)
-      
+  })
+}
+
     // Tilføjer en titel til grafen
     svg2.append("text")
         .attr("x", -10)
@@ -254,7 +240,6 @@
         .style("max-width", 400)
         .text("This chart gives a quick and precise overview of the average temperature pr. country of selected continent");
 
-  });
   </script>
 </body>
 </html>

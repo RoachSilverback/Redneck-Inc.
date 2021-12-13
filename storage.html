@@ -165,3 +165,6 @@
     }).then(function(response) {
       const datatemp = response.data; // Hent data ud af response
       console.log("response", datatemp);
+
+
+      .attr("x", function(d) {return x(d.continent_id) })
