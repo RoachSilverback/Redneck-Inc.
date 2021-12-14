@@ -101,7 +101,7 @@
       };
 
   // Mus klik vælger data
-  let mouseClick = function(d, g){
+  let mouseClick1 = function(d, g){
       update (g.properties.continent)
       console.log(d, g)
   }
@@ -123,7 +123,7 @@
       .attr("class", function(g){return "continent"})
       .on("mouseover", mouseOver1 )
       .on("mouseleave", mouseLeave1 )
-      .on("click", mouseClick )        
+      .on("click", mouseClick1 )
       });
           
     // Heatmap afdeling
@@ -152,7 +152,7 @@
     }).then(function(response) {
       const data = response.data; // Hent data ud af response
       console.log("response", data);
-  
+
     // Byg X skalaer og akse
     const x = d3.scaleBand()
       .range([0, width])
@@ -331,7 +331,7 @@ svg3.append("text")
 // append the svg object to the body of the page
 var svg4 = d3.select("#alkoholindtag")
 .append("svg")
-  .attr("width",  + margin1.left + margin1.right)
+  .attr("width", width1 + margin1.left + margin1.right)
   .attr("height", height1 + margin1.top + margin1.bottom)
 .append("g")
   .attr("transform",
