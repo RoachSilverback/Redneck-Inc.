@@ -73,38 +73,3 @@ svg.selectAll("mycircle")
 })
     
     </script>
-
-
-          
-          for (let i = 1; i <= 6; i++) {
-            for (let y = 1; y < function(d){return datatemp.continent_id}; y++) {
-              if (datatemp[y].continent_id = id){
-              heatmapArray.push("v" + y)}
-              else {
-                id = id + 1
-            }
-          };
-
-          // Array for heatmap x-akse
-          let heatmapArray = [];
-      
-          for (let i = 1; i <= 6; i++) {
-                  for (let y = 1; y <= 10; y++) {
-                    if (datatemp.continent_id=i){
-                    heatmapArray.push("v" + y)}
-            }
-          };
-          console.log(heatmapArray);
-
-
-
-          // Denne query kører op imod API'en som findes i 'main.js'.
-    // Denne HTML skal derfor åbnes igennem serveren for at virke.
-    d3.json("/api/heatmap", {
-      method: "POST", 
-    }).then(function(response) {
-      const datatemp = response.data; // Hent data ud af response
-      console.log("response", datatemp);
-
-
-      .attr("x", function(d) {return x(d.continent_id) })
