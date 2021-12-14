@@ -126,7 +126,7 @@
     let heatmapArrayX = ["Continent"];
 
     // Angiver dimensioner og kanterne på grafen
-    const margin = {top: 80, right: 25, bottom: 30, left: 40},
+    const margin = {top: 80, right: 25, bottom: 30, left: 170},
       width = 250 - margin.left - margin.right,
       height = 850 - margin.top - margin.bottom;
 
@@ -264,7 +264,7 @@ var svg3 = d3.select("#dataliver")
 var xl = d3.scaleBand()
 .range([ width1, 0])
 .domain(data.map(function(d) { return d.country_name}))
-.padding(0.05);
+.padding(1);
 svg3.append("g")
 .attr("transform", "translate(0," + height1 + ")")
 .call(d3.axisBottom(xl))
@@ -287,7 +287,7 @@ svg3.selectAll("myline")
   .attr("x1", function(d) { return xl(d.country_name); })
   .attr("x2", function(d) { return xl(d.country_name); })
   .attr("y1", function(d) { return yl(d.liver_cirrhosis_death_rates_male); })
-  .attr("y2", (0))
+  .attr("y2", yl(0))
   .attr("stroke", "grey")
 
 // Circles
