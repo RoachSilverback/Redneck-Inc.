@@ -66,7 +66,7 @@ app.use(morgan("combined"));
 app.post("/api/data1", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female 
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female, alcohol_consumption_male
     FROM Redneckinc
     WHERE continent_id = '1'`;
     queryData = await client.query(query);
@@ -90,7 +90,7 @@ app.post("/api/data1", async (req, res) => {
 app.post("/api/data2", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female 
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female, alcohol_consumption_male 
     FROM Redneckinc
     WHERE continent_id = '2'`;
     queryData = await client.query(query);
@@ -114,7 +114,7 @@ app.post("/api/data2", async (req, res) => {
 app.post("/api/data3", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female 
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female, alcohol_consumption_male 
     FROM Redneckinc
     WHERE continent_id = '3'`;
     queryData = await client.query(query);
@@ -138,7 +138,7 @@ app.post("/api/data3", async (req, res) => {
 app.post("/api/data4", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female 
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female, alcohol_consumption_male 
     FROM Redneckinc
     WHERE continent_id = '4'`;
     queryData = await client.query(query);
@@ -162,7 +162,7 @@ app.post("/api/data4", async (req, res) => {
 app.post("/api/data5", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female 
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female, alcohol_consumption_male 
     FROM Redneckinc
     WHERE continent_id = '5'`;
     queryData = await client.query(query);
@@ -186,7 +186,7 @@ app.post("/api/data5", async (req, res) => {
 app.post("/api/data6", async (req, res) => {
   try {
     // Lav query
-    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female
+    const query = `SELECT continent_id, country_id, country_name, annual_temperature, liver_cirrhosis_death_rates_male, liver_cirrhosis_death_rates_female, alcohol_consumption_male
     FROM Redneckinc
     WHERE continent_id = '6'`;
     queryData = await client.query(query);

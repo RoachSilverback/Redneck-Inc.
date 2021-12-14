@@ -28,6 +28,9 @@
     #dataliver{
     float: right;
     }
+    #alkoholindtag{
+      float: middle;
+    }
   </style>
 
       <!-- div hvor grafen finder sted -->
@@ -35,7 +38,7 @@
       <div id="kortet"></div>
       <div id="min_datavis"></div>
       <div id="dataliver"></div>
-      </div>
+      <div id="alkoholindtag"></div>
       
 </head>
 
@@ -250,6 +253,7 @@
 var margin1 = {top: 10, right: 30, bottom: 90, left: 40},
   width1 = 460 - margin1.left - margin1.right,
   height1 = 500 - margin1.top - margin1.bottom;
+const barPadding = 1;
 
 // append the svg object to the body of the page
 var svg3 = d3.select("#dataliver")
@@ -319,6 +323,44 @@ svg3.append("text")
     .style("font-family", "cursive")
     .style("max-width", 400)
     .text ("This chart gives a quick and precise overview of liver cirrhosis cases pr. 100.000");
+
+// append the svg object to the body of the page
+var svg4 = d3.select("#alkoholindtag")
+.append("svg")
+  .attr("width",  + margin1.left + margin1.right)
+  .attr("height", height1 + margin1.top + margin1.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + margin1.left + "," + margin1.top + ")");
+
+// X axis
+var xa = d3.scaleBand()
+    .range([ width1, 0 ])
+    .domain(data.map(function(d) { return d.country_name; }))
+    .padding(0.2);
+svg4.append("g")
+    .attr("transform", "translate(0," + height1 + ")")
+    .call(d3.axisBottom(xa))
+    .selectAll("text")
+    .attr("transform", "translate(-10,0)rotate(-45)")
+    .style("text-anchor", "end");
+
+// Add Y axis
+var ya = d3.scaleLinear()
+    .domain([0, d3.max(data, function(d) {return d.alcohol_consumption_male[1]; })])
+    .range([ height1, 0]);
+    svg4.append("g")
+    .call(d3.axisLeft(ya));
+
+//opret Bars
+svg4.data(data)
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i) {return i * (width1 / data.length); })
+    .attr("y", function(d) {return height1 - (d * 4);})
+    .attr("width", width1 / data.length - barPadding)
+    .attr("height", function(d) {return d * 4;})
+    .attr("fill", "#800080");
 
 })
 }
