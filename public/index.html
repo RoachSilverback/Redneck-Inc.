@@ -24,9 +24,11 @@
     #min_datavis{
       overflow: hidden;
       float: left;
+
     }
     #dataliver{
-    float: right;
+      float: right;
+
     }
     #alkoholindtag{
       float: middle;
@@ -36,9 +38,9 @@
       <!-- div hvor grafen finder sted -->
       <div id="overskriften">Rednecks Inc.</div>
       <div id="kortet"></div>
-      <div id="min_datavis"></div>
-      <div id="dataliver"></div>
-      <div id="alkoholindtag"></div>
+        <div id="min_datavis"></div>
+        <div id="alkoholindtag"></div>
+        <div id="dataliver"></div>
       
 </head>
 
@@ -324,6 +326,8 @@ svg3.append("text")
     .style("max-width", 400)
     .text ("This chart gives a quick and precise overview of liver cirrhosis cases pr. 100.000");
 
+
+// Barchart Afdeling
 // append the svg object to the body of the page
 var svg4 = d3.select("#alkoholindtag")
 .append("svg")
@@ -336,7 +340,7 @@ var svg4 = d3.select("#alkoholindtag")
 // X axis
 var xa = d3.scaleBand()
     .range([ width1, 0 ])
-    .domain(data.map(function(d) { return d.country_name; }))
+    .domain(data.map(function(d) { return d.country_name}))
     .padding(0.2);
 svg4.append("g")
     .attr("transform", "translate(0," + height1 + ")")
@@ -347,21 +351,21 @@ svg4.append("g")
 
 // Add Y axis
 var ya = d3.scaleLinear()
-    .domain([0, d3.max(data, function(d) {return d.alcohol_consumption_male[1]; })])
+    .domain([0, 50])
     .range([ height1, 0]);
     svg4.append("g")
     .call(d3.axisLeft(ya));
 
 //opret Bars
-svg4.data(data)
+svg4.selectAll("mybar")
+    .data(data)
     .enter()
     .append("rect")
-    .attr("x", function(d, i) {return i * (width1 / data.length); })
-    .attr("y", function(d) {return height1 - (d * 4);})
-    .attr("width", width1 / data.length - barPadding)
-    .attr("height", function(d) {return d * 4;})
+    .attr("x", function(d) {return xa(d.country_name); })
+    .attr("y", function(d) {return ya(d.alcohol_consumption_male);})
+    .attr("width", xa.bandwidth())
+    .attr("height", function(d) {return height1 - ya(d.alcohol_consumption_male); })
     .attr("fill", "#800080");
-
 })
 }
 
