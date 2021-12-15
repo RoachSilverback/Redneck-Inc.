@@ -8,12 +8,14 @@
   <style type="text/css">
   </style>
   <title>Redneck Inc.</title>
+ 
 
       <!-- div hvor grafen finder sted -->
       <div id="overskriften">Rednecks Inc.</div>
       <div id="kortet"></div>
       <div id="continent"></div>
       <div id="min_datavis"></div>
+      
       
 </head>
 
@@ -24,6 +26,7 @@
     const w = 1200;
     const h = 620;
 
+
   // Lav SVG element til kortet
   const svg1 = d3.select("#kortet")
     .append("svg")
@@ -32,9 +35,9 @@
 
   // Position på kortet
   d3.select("#kortet")
-    .attr("align", "center");
+    .attr("align", "center")
+   
 
-  // Lav din egen visualsering med data her!
     
   // Hent GeoJSON
   d3.json("./continents.json").then(function (json) {
@@ -105,7 +108,7 @@
     const margin = {top: 80, right: 0, bottom: 90, left: 40},
       width = 415 - margin.left - margin.right,
       height = 550 - margin.top - margin.bottom;
-      const barPadding = 1;
+      const barPadding = 2;
 
 // Overskrift med kontinent navn
 const svg5 = d3.select("#continent")
@@ -138,17 +141,21 @@ var svg4 = d3.select("#min_datavis")
   .attr("height", height + margin.top + margin.bottom)
 .append("g")
   .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+        "translate(" + margin.left + "," + margin.top + ")")
+  
         
 // Lollipop diagram
 // append the svg object to the body of the page
 var svg3 = d3.select("#min_datavis")
 .append("svg")
+.attr("align","right")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
 .append("g")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
+ 
+
 
 // Denne query kører op imod API'en som findes i 'main.js'.
 // Denne HTML skal derfor åbnes igennem serveren for at virke.
@@ -262,8 +269,9 @@ svg2.append("g")
 
     // Byg farveskalaen
     const mineFarver = d3.scaleSequential()
-      .interpolator(d3.interpolateGreys)
+      .interpolator(d3.interpolateOranges)
       .domain([1,30])
+      
 
     // Lav tooltippet
     const tooltip = d3.select("#min_datavis")
@@ -320,19 +328,20 @@ svg2.append("g")
 
     // Tilføjer en titel til grafen
     svg2.append("text")
-        .attr("x", -10)
+        .attr("x", 0)
         .attr("y", -40)
         .attr("text-anchor", "left")
         .text("Temperature per Country");
 
     // Tilføjer en beskrivelse til titlen
     svg2.append("text")
-        .attr("x", -10)
+        .attr("x", "max-width")
         .attr("y", -20)
         .attr("text-anchor", "left")
-        .style("font-size", "6px")
+        .style("font-size", "10px")
         .style("max-width", 400)
-        .text("This chart gives a quick and precise overview of the average temperature pr. country of selected continent");
+        .text("This chart gives a quick and precise overview of the average temperature pr. country of selected continent")
+        
 
 // Array for lollipop x-akse
 
@@ -386,19 +395,22 @@ svg3.selectAll("mycircle")
 
 // Tilføjer en titel til Lollipop chart
 svg3.append("text")
-    .attr("x", -10)
+    .attr("x", -0)
     .attr("y", -40)
     .attr("text-anchor", "right")
     .text("Liver Cirrhosis Death Rate per Country");
 
 // Tilføjer en beskrivelse til titlen
 svg3.append("text")
-    .attr("x", -10)
+    .attr("x", "max-width")
     .attr("y", -20)
     .attr("text-anchor", "right")
-    .style("font-size", "6px")
+    .style("font-size", "10px")
     .style("max-width", 800)
     .text ("This chart gives a quick and precise overview of liver cirrhosis cases pr. 100.000");
+
+
+
 
 // Barchart Afdeling
 // X axis
@@ -413,7 +425,7 @@ svg4.append("g")
     .attr("transform", "translate(-0,0)rotate(-90)")
     .style("text-anchor", "end");
     
-
+  
     
 
 // Add Y axis
@@ -436,22 +448,22 @@ svg4.selectAll("mybar")
       .attr("width", xa.bandwidth() )
       .attr("height", function(d) {return height - ya(d.alcohol_consumption_male); })
 
-
+     
 
 // Tilføjer en titel til Barchart
 svg4.append("text")
-    .attr("x", -10)
+    .attr("x", -0)
     .attr("y", -40)
     .attr("text-anchor", "rigth")
     .text("Alcohol Consumption per Country")
 
 svg4.append("text")
-    .attr("x", -10)
+    .attr("x", "max-width")
     .attr("y", -20)
     .attr("text-anchor", "right")
-    .style("font-size", "6px")
+    .style("font-size", "10px")
     .style("max-width", 400)
-    .text ("This chart gives a quick and precise over of average alcohol consumption pr. litre pr. capita")
+    .text ("This chart gives a quick and precise over of average alcohol consumption pr. litre pr. country")
 })
 }
   </script>
