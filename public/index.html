@@ -76,7 +76,6 @@
 
   // Mus klik vælger data
   let mouseClick1 = function(d, g){
-      // d3.selectAll("#min_datavis").remove()
       update (g.properties.continent)
       console.log(d, g)
   }
@@ -148,7 +147,7 @@ function update(selectedVar) {
 
 // Update data afdeling
 // Update text heatmap
-let nyData = data;
+let nyData = `/api/data${selectedVar}`;
 let updateDia21 = svg2.selectAll("text")
     .data(nyData);
 updateDia21.enter()
