@@ -12,6 +12,7 @@
       <!-- div hvor grafen finder sted -->
       <div id="overskriften">Rednecks Inc.</div>
       <div id="kortet"></div>
+      <div id="continent"></div>
       <div id="min_datavis"></div>
       
 </head>
@@ -106,6 +107,19 @@
       height = 550 - margin.top - margin.bottom;
       const barPadding = 1;
 
+// Overskrift med kontinent navn
+const svg5 = d3.select("#continent")
+  .append("svg")
+    .attr("width", w)
+    .attr("height", h - 570)
+
+/*
+let kontinentNavn = "continent";
+  if (properties.continent === 1){
+    kontinentNavn = "Africa"
+  };
+*/
+
       //Heatmap diagram
   // appender svg objektet til body på siden
     const svg2 = d3.select("#min_datavis")
@@ -144,6 +158,8 @@ function update(selectedVar) {
   }).then(function(response) {
     const data = response.data; // Hent data ud af response
     console.log("response", data);
+
+
 
 // Update data afdeling
 // Update text heatmap
@@ -211,8 +227,15 @@ updateDia33.enter()
 updateDia33.exit()
     .remove();
 
-// Array for heatmap x-akse
+// Overskrift til diagrammer (kontinent)
+svg5.select("#continent")
+  .data(kontinentNavn)
+  .enter()
+  .append("text")
+  .attr("align", "center");
+
 // Heatmap afdeling
+// Array for heatmap y-akse
 let heatmapArrayX = [];
 
 // Byg X skalaer og akse

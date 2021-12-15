@@ -9,11 +9,16 @@
   font-size: 400%;
 }
 body {
-    background-image: linear-gradient(to bottom right, rgb(121, 0, 177), rgb(22, 22, 22));
+    background-image: linear-gradient(to bottom right, rgb(121, 0, 177), rgb(54, 54, 54));
 }
-#text{
-  color: white;
+.text{
+  color: silver;
 }
 #min_datavis{
+  overflow: hidden;
   float: left;
+  color: silver;
+  font-family:sans-serif,Arial;
+  font-size: 20px;
+  fill: silver;
 }
