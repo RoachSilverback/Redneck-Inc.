@@ -247,7 +247,7 @@ svg2.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x).tickSize(0))
   .selectAll("text")
-  .attr("transform", "translate(-10,0)rotate(-45)")
+  .attr("transform", "translate(-10,0)rotate(-90)")
   .style("text-anchor", "end")
   .select(".domain").remove();
 
@@ -323,7 +323,7 @@ svg2.append("g")
         .attr("x", -10)
         .attr("y", -40)
         .attr("text-anchor", "left")
-        .text("Heatmap");
+        .text("Temperature per Country");
 
     // Tilføjer en beskrivelse til titlen
     svg2.append("text")
@@ -347,7 +347,7 @@ svg3.append("g")
 .attr("transform", "translate(0," + height + ")")
 .call(d3.axisBottom(xl))
 .selectAll("text")
-  .attr("transform", "translate(-10,0)rotate(-45)")
+  .attr("transform", "translate(-10,0)rotate(-90)")
   .style("text-anchor", "end");
 
 // Add Y axis
@@ -389,7 +389,7 @@ svg3.append("text")
     .attr("x", -10)
     .attr("y", -40)
     .attr("text-anchor", "right")
-    .text("Lollipop Chart");
+    .text("Liver Cirrhosis Death Rate per Country");
 
 // Tilføjer en beskrivelse til titlen
 svg3.append("text")
@@ -397,7 +397,7 @@ svg3.append("text")
     .attr("y", -20)
     .attr("text-anchor", "right")
     .style("font-size", "6px")
-    .style("max-width", 400)
+    .style("max-width", 800)
     .text ("This chart gives a quick and precise overview of liver cirrhosis cases pr. 100.000");
 
 // Barchart Afdeling
@@ -410,8 +410,11 @@ svg4.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(xa))
     .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
+    .attr("transform", "translate(-0,0)rotate(-90)")
     .style("text-anchor", "end");
+    
+
+    
 
 // Add Y axis
 var ya = d3.scaleLinear()
@@ -433,12 +436,14 @@ svg4.selectAll("mybar")
       .attr("width", xa.bandwidth() )
       .attr("height", function(d) {return height - ya(d.alcohol_consumption_male); })
 
+
+
 // Tilføjer en titel til Barchart
 svg4.append("text")
     .attr("x", -10)
     .attr("y", -40)
     .attr("text-anchor", "rigth")
-    .text("Bar Chart")
+    .text("Alcohol Consumption per Country")
 
 svg4.append("text")
     .attr("x", -10)
