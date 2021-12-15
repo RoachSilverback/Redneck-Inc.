@@ -9,7 +9,7 @@
   font-size: 400%;
 }
 body {
-    background-image: linear-gradient(to bottom right, rgb(121, 0, 177), rgb(54, 54, 54));
+    background-image: linear-gradient(to bottom right, rgb(97, 12, 196), rgb(0, 0, 0));
 }
 .text{
   color: silver;
@@ -22,3 +22,8 @@ body {
   font-size: 20px;
   fill: silver;
 }
+
+/*  .transition()
+  .duration(300)
+  .delay(function(d,i){console.log(i) ; return(i*100)})
+  */
