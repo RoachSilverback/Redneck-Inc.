@@ -258,7 +258,7 @@ svg2.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x).tickSize(0))
   .selectAll("text")
-  .attr("transform", "translate(-10,0)rotate(-65)")
+  .attr("transform", "translate(-5,0)rotate(-65)")
   .style("text-anchor", "end")
   .select(".domain").remove();
 
@@ -361,9 +361,9 @@ var xl = d3.scaleBand()
 .padding(1);
 svg3.append("g")
 .attr("transform", "translate(0," + height + ")")
-.call(d3.axisBottom(xl))
+.call(d3.axisBottom(xl).tickSize(0))
 .selectAll("text")
-  .attr("transform", "translate(  0,0)rotate(-65)")
+  .attr("transform", "translate(-6,0)rotate(-65)")
   .style("text-anchor", "end");
 
 // Add Y axis
@@ -430,9 +430,9 @@ var xa = d3.scaleBand()
     .padding(0.2);
 svg4.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(xa))
+    .call(d3.axisBottom(xa) .tickSize(0))
     .selectAll("text")
-    .attr("transform", "translate(-0,0)rotate(-65)")
+    .attr("transform", "translate(-5,0)rotate(-65)")
     .style("text-anchor", "end");
     
 // Add Y axis
