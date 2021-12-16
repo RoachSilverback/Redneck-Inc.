@@ -280,11 +280,8 @@ svg2.append("g")
     const tooltip = d3.select("#tooltip")
       .style("opacity", 0)
       .attr("class", "tooltip")
-      .style("background-color", "darkgrey")
-      .style("border", "solid")
-      .style("border-width", "2px")
-      .style("border-radius", "5px")
-      .style("padding", "5px")
+      .style("position", "relative")
+      .style("text-align", "center")
 
     // 3 mus funktioner der ændrer tooltippet når du holder over / bevæger / forlader en celle
     const mouseover = function(d) {
@@ -301,11 +298,11 @@ svg2.append("g")
     }
     const mousemovebar = function(d, t) {
       tooltip
-        .html(t.country_name + " : " + t.alcohol_consumption_both + " degress")
+        .html(t.country_name + " : " + t.alcohol_consumption_both + " pr. litre pr. capita")
     }
     const mousemovelolli = function(d, t) {
       tooltip
-        .html(t.country_name + " : " + (parseFloat(t.liver_cirrhosis_death_rates_male) + parseFloat(t.liver_cirrhosis_death_rates_female)) + " degress")
+        .html(t.country_name + " : " + (parseFloat(t.liver_cirrhosis_death_rates_male) + parseFloat(t.liver_cirrhosis_death_rates_female)) + " cases pr. 100.000")
     }
     
     const mouseleave = function(d) {
