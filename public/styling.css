@@ -1,29 +1,30 @@
 #heading1 {
-    color: red
+  color: red
 }
 #overskriften{
-  text-align: center;
-  text-shadow: 0 0 10px rgb(0, 0, 0);
-  color: silver;
-  font-family:Fantasy,Copperplate;
-  font-size: 400%;
+text-align: center;
+color: orange;
+font-family:Fantasy,Copperplate;
+text-shadow: 2px 2px #000000;
+font-size: 400%;
 }
 body {
-    background-image: linear-gradient(to bottom right, rgb(97, 12, 196), rgb(0, 0, 0));
+  background-image: linear-gradient(to bottom right, grey, rgb(0, 0, 0));
 }
 .text{
-  color: silver;
+color: white;
 }
 #min_datavis{
-  overflow: hidden;
-  float: left;
-  color: silver;
-  font-family:sans-serif,Arial;
-  font-size: 20px;
-  fill: silver;
-}
+overflow: hidden;
+float: left;
+color: whitesmoke;
+font-family:sans-serif,Arial;
+font-size: 20px;
+fill: orange;
 
-/*  .transition()
-  .duration(300)
-  .delay(function(d,i){console.log(i) ; return(i*100)})
-  */
+display: flex;
+position: relative;
+justify-content: center;
+align-items: center;
+width: 100%;
+}
