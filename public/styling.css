@@ -5,7 +5,7 @@
   text-align: center;
   color: orange;
   font-family:Fantasy,Copperplate;
-  text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
   font-size: 400%;
   position: relative;
   justify-content: center;
@@ -43,7 +43,7 @@ body {
   text-align: center;
   color: orange;
   font-family:Fantasy,Copperplate;
-  text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
   font-size: 300%;
   position: relative;
   justify-content: center;
@@ -58,6 +58,27 @@ body {
   font-size: 110%;
   margin-top: 10px;
   margin-bottom: 30px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#tooltip{
+  position: relative;
+  color: orange;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  width: 100%;
+  font-family:sans-serif,Arial;
+}
+
+
+/*  .transition()
+  .duration(300)
+  .delay(function(d,i){console.log(i) ; return(i*100)})
+
   position: relative;
   justify-content: center;
   align-items: center;
