@@ -173,8 +173,9 @@ function update(selectedVar) {
   };
 
 // Update data afdeling
-// Update text heatmap
 let nyData = `/api/data${selectedVar}`;
+
+// Update text heatmap
 let updateDia21 = svg2.selectAll("text")
     .data(nyData);
 updateDia21.enter()
@@ -277,7 +278,6 @@ svg2.append("g")
 
     // Lav tooltippet
     const tooltip = d3.select("#tooltip")
-      .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
       .style("background-color", "darkgrey")
@@ -295,9 +295,17 @@ svg2.append("g")
         .style("opacity", 1)
     }
 
-    const mousemove = function(d, t) {
+    const mousemoveheat = function(d, t) {
       tooltip
         .html(t.country_name + " : " + t.annual_temperature + " degress")
+    }
+    const mousemovebar = function(d, t) {
+      tooltip
+        .html(t.country_name + " : " + t.alcohol_consumption_both + " degress")
+    }
+    const mousemovelolli = function(d, t) {
+      tooltip
+        .html(t.country_name + " : " + (parseFloat(t.liver_cirrhosis_death_rates_male) + parseFloat(t.liver_cirrhosis_death_rates_female)) + " degress")
     }
     
     const mouseleave = function(d) {
@@ -306,6 +314,7 @@ svg2.append("g")
       d3.select(this)
         .style("stroke", "none")
         .style("opacity", 0.8)
+        .exit().remove()
     }
 
     // Tilføj firkanter
@@ -313,6 +322,9 @@ svg2.append("g")
       .data(data)
       .enter()
       .append("rect")
+        .transition()
+        .duration(300)
+        .delay(function(d,i){return(i*100)})
         .attr("x", function(d) {return x(d.country_name) })
         .attr("rx", 4)  
         .attr("ry", 4)
@@ -322,8 +334,10 @@ svg2.append("g")
         .style("stroke-width", 4)
         .style("stroke", "none")
         .style("opacity", 0.8)
+
+svg2.selectAll("rect")
       .on("mouseover", mouseover)
-      .on("mousemove", mousemove)
+      .on("mousemove", mousemoveheat)
       .on("mouseleave", mouseleave)
 
     // Tilføjer en titel til grafen
@@ -390,6 +404,11 @@ svg3.selectAll("mycircle")
   .attr("r", "4")
   .attr("stroke", "black")
 
+svg3.selectAll("circle")  
+  .on("mouseover", mouseover)
+  .on("mousemove", mousemovelolli)
+  .on("mouseleave", mouseleave)
+
 // Tilføjer en titel til Lollipop chart
 svg3.append("text")
     .attr("x", 0)
@@ -435,9 +454,14 @@ svg4.selectAll("mybar")
       .duration(300)
       .delay(function(d,i){return(i*100)})
       .attr("x", function(d) {return xa(d.country_name); })
-      .attr("y", function(d) {return ya(d.alcohol_consumption_male);})
+      .attr("y", function(d) {return ya(d.alcohol_consumption_both);})
       .attr("width", xa.bandwidth() )
-      .attr("height", function(d) {return height - ya(d.alcohol_consumption_male); })
+      .attr("height", function(d) {return height - ya(d.alcohol_consumption_both); })
+
+svg4.selectAll("rect")
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemovebar)
+    .on("mouseleave", mouseleave)
 
 // Tilføjer en titel til Barchart
 svg4.append("text")
