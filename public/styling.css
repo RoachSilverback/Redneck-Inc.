@@ -5,7 +5,7 @@
   text-align: center;
   color: orange;
   font-family:Fantasy,Copperplate;
-  text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
   font-size: 400%;
   position: relative;
   justify-content: center;
@@ -43,7 +43,7 @@ body {
   text-align: center;
   color: orange;
   font-family:Fantasy,Copperplate;
-  text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px 5px rgb(0, 0, 0);
   font-size: 300%;
   position: relative;
   justify-content: center;
@@ -73,6 +73,7 @@ body {
   width: 100%;
   font-family:sans-serif,Arial;
 }
+
 
 /*  .transition()
   .duration(300)
