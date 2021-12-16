@@ -15,7 +15,7 @@
       <div id="kortet"></div>
       <div id="continent"></div>
       <div id="tooltip"></div>
-      <div id="min_datavis"></div>
+      <div id="min_datavis" class="svg"></div>
       
 </head>
 
@@ -98,6 +98,7 @@
         return "silver";
         })
       .attr("class", function(g){return "continent"})
+      .style("text-align", "center")
       .on("mouseover", mouseOver1 )
       .on("mouseleave", mouseLeave1 )
       .on("click", mouseClick1)
@@ -319,23 +320,27 @@ svg2.append("g")
       .data(data)
       .enter()
       .append("rect")
-        .transition()
-        .duration(300)
-        .delay(function(d,i){return(i*100)})
         .attr("x", function(d) {return x(d.country_name) })
         .attr("rx", 4)  
         .attr("ry", 4)
-        .attr("width", x.bandwidth() )
+        .attr("width", x.bandwidth()-35 )
         .attr("height", y.bandwidth() + 19 )
         .style("fill", function(d) {return mineFarver(d.annual_temperature)} )
         .style("stroke-width", 4)
         .style("stroke", "none")
         .style("opacity", 0.8)
 
-svg2.selectAll("rect")
-      .on("mouseover", mouseover)
-      .on("mousemove", mousemoveheat)
-      .on("mouseleave", mouseleave)
+     svg2.selectAll("rect")
+        .transition()
+          .duration(1000)
+          .attr("width", x.bandwidth() )
+          .delay(function(d,i){console.log(i) ; return(i*3)})
+        
+
+      svg2.selectAll("rect")
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemoveheat)
+        .on("mouseleave", mouseleave)
 
     // Tilføjer en titel til grafen
     svg2.append("text")
@@ -375,31 +380,34 @@ svg3.append("g")
 
 // Lines
 svg3.selectAll("myline")
-.data(data)
-.enter()
-.append("line")
-  .transition()
-  .duration(300)
-  .delay(function(d,i){return(i*100)})
-  .attr("x1", function(d) { return xl(d.country_name); })
-  .attr("x2", function(d) { return xl(d.country_name); })
-  .attr("y1", function(d) { return yl(parseFloat(d.liver_cirrhosis_death_rates_male)+parseFloat(d.liver_cirrhosis_death_rates_female)); 
-  })
-  .attr("y2", yl(0))
-  .attr("stroke", "grey")
+  .data(data)
+  .enter()
+  .append("line")
+    .attr("x1", function(d) { return xl(d.country_name); })
+    .attr("x2", function(d) { return xl(d.country_name); })
+    .attr("y1", function(d) { return yl(0); })
+    .attr("y2", yl(0))
+    .attr("stroke", "grey")
 
 // Circles
 svg3.selectAll("mycircle")
-.data(data)
-.enter()
-.append("circle")
+  .data(data)
+  .enter()
+  .append("circle")
+    .attr("cx", function(d) { return xl(d.country_name); })
+    .attr("cy", function(d) { return yl(0); })
+    .attr("r", "4")
+    .attr("stroke", "black")
+
+svg3.selectAll("circle")
   .transition()
-  .duration(300)
-  .delay(function(d,i){return(i*100)})
-  .attr("cx", function(d) { return xl(d.country_name); })
-  .attr("cy", function(d) { return yl(parseFloat(d.liver_cirrhosis_death_rates_male)+parseFloat(d.liver_cirrhosis_death_rates_female)); })
-  .attr("r", "4")
-  .attr("stroke", "black")
+    .duration(1000)
+    .attr("cy", function(d) { return yl(parseFloat(d.liver_cirrhosis_death_rates_male)+parseFloat(d.liver_cirrhosis_death_rates_female)); })
+
+svg3.selectAll("line")
+  .transition()
+    .duration(1000)
+    .attr("y1", function(d) { return yl(parseFloat(d.liver_cirrhosis_death_rates_male)+parseFloat(d.liver_cirrhosis_death_rates_female)); })
 
 svg3.selectAll("circle")  
   .on("mouseover", mouseover)
@@ -447,13 +455,16 @@ svg4.selectAll("mybar")
     .data(data)
     .enter()
     .append("rect")
-      .transition()
-      .duration(300)
-      .delay(function(d,i){return(i*100)})
       .attr("x", function(d) {return xa(d.country_name); })
-      .attr("y", function(d) {return ya(d.alcohol_consumption_both);})
+      .attr("y", function(d) {return ya(0);})
       .attr("width", xa.bandwidth() )
+      .attr("height", function(d) {return height - ya(0); })
+
+svg4.selectAll("rect")
+    .transition()
+      .duration(1000)
       .attr("height", function(d) {return height - ya(d.alcohol_consumption_both); })
+      .attr("y", function(d) {return ya(d.alcohol_consumption_both);})
 
 svg4.selectAll("rect")
     .on("mouseover", mouseover)
