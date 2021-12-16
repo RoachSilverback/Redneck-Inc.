@@ -108,17 +108,8 @@
       const barPadding = 1;
 
 // Overskrift med kontinent navn
-const svg5 = d3.select("#continent")
-  .append("svg")
-    .attr("width", w)
-    .attr("height", h - 570)
-
-/*
-let kontinentNavn = "continent";
-  if (properties.continent === 1){
-    kontinentNavn = "Africa"
-  };
-*/
+const kontinenTitel = d3.select("#continent")
+  .append("p")
 
       //Heatmap diagram
   // appender svg objektet til body på siden
@@ -159,7 +150,25 @@ function update(selectedVar) {
     const data = response.data; // Hent data ud af response
     console.log("response", data);
 
-
+    let kontinentNavn = `/api/data${selectedVar}`;
+  if (`/api/data${selectedVar}` === "/api/data1"){
+    kontinentNavn = "Africa"
+  }
+  if (`/api/data${selectedVar}` === "/api/data2"){
+    kontinentNavn = "Asia"
+  }
+  if (`/api/data${selectedVar}` === "/api/data3"){
+    kontinentNavn = "South America"
+  }
+  if (`/api/data${selectedVar}` === "/api/data4"){
+    kontinentNavn = "North America"
+  }
+  if (`/api/data${selectedVar}` === "/api/data5"){
+    kontinentNavn = "Europe"
+  }
+  else if (`/api/data${selectedVar}` === "/api/data6"){
+    kontinentNavn = "Oceania"
+  };
 
 // Update data afdeling
 // Update text heatmap
@@ -228,11 +237,10 @@ updateDia33.exit()
     .remove();
 
 // Overskrift til diagrammer (kontinent)
-svg5.select("#continent")
-  .data(data)
-  .enter()
-  .append("text")
-  .attr("align", "center");
+kontinenTitel.text(kontinentNavn)
+  .style("font-size", "30px")
+  .style("fill", "white")
+  .text(kontinentNavn);
 
 // Heatmap afdeling
 // Array for heatmap y-akse
@@ -247,7 +255,7 @@ svg2.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x).tickSize(0))
   .selectAll("text")
-  .attr("transform", "translate(-10,0)rotate(-90)")
+  .attr("transform", "translate(-10,0)rotate(-65)")
   .style("text-anchor", "end")
   .select(".domain").remove();
 
@@ -262,12 +270,11 @@ svg2.append("g")
 
     // Byg farveskalaen
     const mineFarver = d3.scaleSequential()
-      .interpolator(d3.interpolateGreys)
+      .interpolator(d3.interpolateOranges)
       .domain([1,30])
 
     // Lav tooltippet
     const tooltip = d3.select("#min_datavis")
-      .data(data)
       .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
@@ -286,10 +293,9 @@ svg2.append("g")
         .style("opacity", 1)
     }
 
-    const mousemove = function(d) {
+    const mousemove = function(d, t) {
       tooltip
-        .data(data)
-        .html("Country Name : " + d.country_name)
+        .html(t.country_name + " : " + t.annual_temperature + " degress")
     }
     
     const mouseleave = function(d) {
@@ -320,24 +326,21 @@ svg2.append("g")
 
     // Tilføjer en titel til grafen
     svg2.append("text")
-        .attr("x", -10)
+        .attr("x", 0)
         .attr("y", -40)
         .attr("text-anchor", "left")
         .text("Temperature per Country");
 
     // Tilføjer en beskrivelse til titlen
     svg2.append("text")
-        .attr("x", -10)
+        .attr("x", "max-width")
         .attr("y", -20)
         .attr("text-anchor", "left")
-        .style("font-size", "6px")
+        .style("font-size", "10px")
         .style("max-width", 400)
         .text("This chart gives a quick and precise overview of the average temperature pr. country of selected continent");
 
 // Array for lollipop x-akse
-
-// Dimensionerne for grafen er anvendt fra heatmap
-
 // X axis
 var xl = d3.scaleBand()
 .range([ 0, width ])
@@ -347,12 +350,12 @@ svg3.append("g")
 .attr("transform", "translate(0," + height + ")")
 .call(d3.axisBottom(xl))
 .selectAll("text")
-  .attr("transform", "translate(-10,0)rotate(-90)")
+  .attr("transform", "translate(  0,0)rotate(-65)")
   .style("text-anchor", "end");
 
 // Add Y axis
 var yl = d3.scaleLinear()
-.domain([0, 300])
+.domain([0, 350])
 .range([ height, 0]);
 svg3.append("g")
 .call(d3.axisLeft(yl));
@@ -364,10 +367,11 @@ svg3.selectAll("myline")
 .append("line")
   .transition()
   .duration(300)
-  .delay(function(d,i){console.log(i) ; return(i*100)})
+  .delay(function(d,i){return(i*100)})
   .attr("x1", function(d) { return xl(d.country_name); })
   .attr("x2", function(d) { return xl(d.country_name); })
-  .attr("y1", function(d) { return yl(((d.liver_cirrhosis_death_rates_male)+(d.liver_cirrhosis_death_rates_female))); })
+  .attr("y1", function(d) { return yl(parseFloat(d.liver_cirrhosis_death_rates_male)+parseFloat(d.liver_cirrhosis_death_rates_female)); 
+  })
   .attr("y2", yl(0))
   .attr("stroke", "grey")
 
@@ -378,25 +382,25 @@ svg3.selectAll("mycircle")
 .append("circle")
   .transition()
   .duration(300)
-  .delay(function(d,i){console.log(i) ; return(i*100)})
+  .delay(function(d,i){return(i*100)})
   .attr("cx", function(d) { return xl(d.country_name); })
-  .attr("cy", function(d) { return yl(((d.liver_cirrhosis_death_rates_male)+(d.liver_cirrhosis_death_rates_female))); })
+  .attr("cy", function(d) { return yl(parseFloat(d.liver_cirrhosis_death_rates_male)+parseFloat(d.liver_cirrhosis_death_rates_female)); })
   .attr("r", "4")
   .attr("stroke", "black")
 
 // Tilføjer en titel til Lollipop chart
 svg3.append("text")
-    .attr("x", -10)
+    .attr("x", 0)
     .attr("y", -40)
     .attr("text-anchor", "right")
     .text("Liver Cirrhosis Death Rate per Country");
 
 // Tilføjer en beskrivelse til titlen
 svg3.append("text")
-    .attr("x", -10)
+    .attr("x", "max-width")
     .attr("y", -20)
     .attr("text-anchor", "right")
-    .style("font-size", "6px")
+    .style("font-size", "10px")
     .style("max-width", 800)
     .text ("This chart gives a quick and precise overview of liver cirrhosis cases pr. 100.000");
 
@@ -410,12 +414,9 @@ svg4.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(xa))
     .selectAll("text")
-    .attr("transform", "translate(-0,0)rotate(-90)")
+    .attr("transform", "translate(-0,0)rotate(-65)")
     .style("text-anchor", "end");
     
-
-    
-
 // Add Y axis
 var ya = d3.scaleLinear()
     .domain([0, 30])
@@ -430,26 +431,24 @@ svg4.selectAll("mybar")
     .append("rect")
       .transition()
       .duration(300)
-      .delay(function(d,i){console.log(i) ; return(i*100)})
+      .delay(function(d,i){return(i*100)})
       .attr("x", function(d) {return xa(d.country_name); })
       .attr("y", function(d) {return ya(d.alcohol_consumption_male);})
       .attr("width", xa.bandwidth() )
       .attr("height", function(d) {return height - ya(d.alcohol_consumption_male); })
 
-
-
 // Tilføjer en titel til Barchart
 svg4.append("text")
-    .attr("x", -10)
+    .attr("x", 0)
     .attr("y", -40)
-    .attr("text-anchor", "rigth")
+    .attr("text-anchor", "right")
     .text("Alcohol Consumption per Country")
 
 svg4.append("text")
-    .attr("x", -10)
+    .attr("x", "max-width")
     .attr("y", -20)
-    .attr("text-anchor", "right")
-    .style("font-size", "6px")
+    .attr("text-anchor", "right") 
+    .style("font-size", "10px")
     .style("max-width", 400)
     .text ("This chart gives a quick and precise over of average alcohol consumption pr. litre pr. capita")
 })
