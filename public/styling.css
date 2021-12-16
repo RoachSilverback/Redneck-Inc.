@@ -5,6 +5,7 @@
   text-align: center;
   color: orange;
   font-family:Fantasy,Copperplate;
+  text-shadow: 2px 2px #000000;
   font-size: 400%;
 }
 body {
@@ -20,10 +21,22 @@ body {
   font-family:sans-serif,Arial;
   font-size: 20px;
   fill: orange;
+
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 
 /*  .transition()
   .duration(300)
   .delay(function(d,i){console.log(i) ; return(i*100)})
+
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
   */
